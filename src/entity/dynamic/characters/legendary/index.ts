@@ -1,8 +1,9 @@
-import {Keys, Input, Vector, Engine, Animation, CollisionType, Collider, Side, CollisionContact} from 'excalibur'
+import {Keys, Input, Vector, Engine, Animation, CollisionType, Collider, Side, CollisionContact, Actor} from 'excalibur'
 import * as ex from 'excalibur'
 import {BaseHero} from '../baseHero'
 import {Images} from '../../../../resources'
-import { Sword } from '../../weapons'
+import {Sword} from '../../weapons'
+import { BambooMonter } from '../../monters/okla'
 
 export const PlayerCollisionGroup = ex.CollisionGroupManager.create('player')
 
@@ -17,15 +18,15 @@ export class LegendHero extends BaseHero {
       height: 64,
       collisionType: CollisionType.Active,
       collisionGroup: PlayerCollisionGroup,
-      collider: ex.Shape.Box(60,60)
+      collider: ex.Shape.Box(60, 60)
     })
-    this.weapon = new Sword(this.pos.x,this.pos.y)
+    this.weapon = new Sword(this, 0, 0)
   }
   onInitialize(engine: Engine) {
-    
-    this.addTag("player")
+    this.addTag('player')
+    // this.addChild(this.weapon)
     const playerSpriteSheet = ex.SpriteSheet.fromImageSource({
-      image: Images.Monk2,
+      image: Images.Cavegirl2,
       grid: {
         spriteWidth: 16,
         spriteHeight: 16,
@@ -109,7 +110,7 @@ export class LegendHero extends BaseHero {
 
   onPreUpdate(engine: ex.Engine, elapsedMs: number): void {
     this.vel = ex.Vector.Zero
-    
+
     if (engine.input.keyboard.isHeld(ex.Input.Keys.D)) {
       this.vel = ex.vec(200, 0)
       this.graphics.use('right-walk')
@@ -126,21 +127,44 @@ export class LegendHero extends BaseHero {
       this.vel = ex.vec(0, 200)
       this.graphics.use('down-walk')
     }
+    // if (engine.input.keyboard.isHeld(ex.Input.Keys.O)) {
+    //   this.weapon.vel = ex.vec(0,400)
+    // }
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space)) {
       // this.vel = ex.vec(0, 200)
-      this.weapon = new Sword(this.pos.x,this.pos.y)
-      engine.add(this.weapon)
-      this.graphics.use('attack-left')
-      this.isAttack = true
+      this.onAttack(engine)
     }
 
-    if(engine.input.keyboard.wasReleased(ex.Input.Keys.Space)){
-      this.weapon.kill()
+    if (engine.input.keyboard.wasReleased(ex.Input.Keys.Space)) {
       this.isAttack = false
     }
-    if(this.vel.size === 0 && !this.isAttack) this.graphics.use('down-idle')
+    if (this.vel.size === 0 && !this.isAttack) this.graphics.use('down-idle')
   }
+
   onCollisionStart(self: Collider, other: Collider, side: Side, contact: CollisionContact) {
-    console.log('collision',self, other, side, contact)
+    // if (other.owner.hasTag('monters')) {
+      
+    //   (other.owner as BambooMonter).takeDamage(5)
+    // }
+  }
+
+  okla() {
+    console.log('dadadada', 'okla')
+  }
+
+  onAttack(engine: any) {
+    const allMonter = this.scene?.world.queryManager.createTagQuery(['monters']).getEntities((a:any, b:any) => {
+      const spaceA = this.pos.sub(a.pos).size
+      const spaceB = this.pos.sub(b.pos).size
+      return spaceA-spaceB
+    })[0] as Actor
+    if(!allMonter) return
+    const {x, y} = this.pos
+    const weapon = new Sword(this, x, y)
+    weapon.vel = allMonter.pos.sub(this.pos)
+
+    engine.add(weapon)
+    this.graphics.use('attack-left')
+    this.isAttack = true
   }
 }

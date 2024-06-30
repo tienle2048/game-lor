@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="13">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="39">
  <tileset firstgid="1" source="TilesetFloor.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="20">
   <data encoding="csv">
@@ -56,25 +56,28 @@
   <object id="3" name="Player" type="player" x="204.117" y="276.84">
    <point/>
   </object>
-  <object id="5" name="dadada" type="dadada" x="825.316" y="254.43">
-   <point/>
-  </object>
-  <object id="7" name="dadada" type="dadada" x="762.025" y="334.177">
-   <point/>
-  </object>
-  <object id="8" name="dadada" type="dadada" x="788.608" y="410.127">
-   <point/>
-  </object>
-  <object id="9" name="dadada" type="dadada" x="891.139" y="354.43">
-   <point/>
-  </object>
-  <object id="10" name="dadada" type="dadada" x="875.949" y="232.911">
-   <point/>
-  </object>
   <object id="11" name="dadada" type="dadada" x="745.57" y="124.051">
    <point/>
   </object>
   <object id="12" name="dadada" type="dadada" x="860.759" y="131.646">
+   <point/>
+  </object>
+  <object id="33" name="dadada" type="dadada" x="778.481" y="146.835">
+   <point/>
+  </object>
+  <object id="34" name="dadada" type="dadada" x="824.051" y="83.5443">
+   <point/>
+  </object>
+  <object id="35" name="dadada" type="dadada" x="808.861" y="56.962">
+   <point/>
+  </object>
+  <object id="36" name="dadada" type="dadada" x="818.987" y="553.165">
+   <point/>
+  </object>
+  <object id="37" name="dadada" type="dadada" x="387.342" y="605.063">
+   <point/>
+  </object>
+  <object id="38" name="dadada" type="dadada" x="640.506" y="620.253">
    <point/>
   </object>
  </objectgroup>

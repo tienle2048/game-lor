@@ -5,6 +5,8 @@ const game = new Engine({
   antialiasing: false,
   displayMode: DisplayMode.FillScreen
 })
+game.toggleDebug();
+
 
 // const map1 = new GameMap(0,0,Images.map1)
 // game.add(map1)
@@ -23,7 +25,7 @@ const heroSpriteSheet = SpriteSheet.fromImageSource({
   }
 })
 console.log('🚀 ~ heroSpriteSheet:', heroSpriteSheet)
-
+ 
 const run1 = Animation.fromSpriteSheet(heroSpriteSheet, range(0, 10), 1000)
 run1.scale = vec(4, 4)
 
@@ -50,7 +52,6 @@ run1.scale = vec(4, 4)
 // //   paddle.pos.x = evt.worldPos.x;
 // //   paddle.pos.y = evt.worldPos.y;
 // // });
-
 await game.start(loader)
 
 Maps.TiledMap.addToScene(game.currentScene)

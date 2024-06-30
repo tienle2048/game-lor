@@ -19,6 +19,7 @@ export class BambooMonter extends BaseMonter {
     // this.graphics.use(animation)
   }
   onInitialize(engine: Engine) {
+    this.addTag("monters")
     const playerSpriteSheet = ex.SpriteSheet.fromImageSource({
       image: Images.Bamboo,
       grid: {
@@ -114,7 +115,7 @@ export class BambooMonter extends BaseMonter {
     if (ad.size < 400) {
       this.vel = ad.normalize().scale(ex.vec(100, 100))
     }
-    if (this.hp < 0) {
+    if (this.hp <= 0) {
       this.kill()
     }
   }
@@ -122,11 +123,16 @@ export class BambooMonter extends BaseMonter {
   onCollisionStart(self: ex.Collider, other: ex.Collider, side: ex.Side, contact: ex.CollisionContact): void {
     console.log("🚀 ~ BambooMonter ~ onCollisionStart ~ other:", other,other.owner.hasTag('weapons'))
     if (other.owner.hasTag('weapons')) {
-      this.takeDamage()
+      this.takeDamage(5)
     }
+    if (other.owner.hasTag('player')) {
+        console.log("dadadada",other)
+        // other.owner.okla()
+      }
   }
 
-  takeDamage() {
-    this.hp -= 5
+  takeDamage(dame: number) {
+    console.log("🚀 ~ BambooMonter ~ takeDamage ~ dame:", dame)
+    this.hp -= dame
   }
 }
