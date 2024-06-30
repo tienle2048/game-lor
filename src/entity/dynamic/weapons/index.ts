@@ -18,24 +18,22 @@ export class Sword extends ex.Actor {
   }
   onInitialize(engine: Engine) {
     const playerSpriteSheet = ex.SpriteSheet.fromImageSource({
-      image: Images.Axe,
+      image: Images.Shuriken,
       grid: {
-        spriteWidth: 11,
-        spriteHeight: 8,
+        spriteWidth: 16,
+        spriteHeight: 16,
         rows: 1,
         columns: 1
       }
     })
     const adad = playerSpriteSheet.getSprite(0, 0)
     adad.rotation = -1.57079633
-    adad.height = 8 * 4
-    adad.width = 44
-    console.log('🚀 ~ Sword ~ onInitialize ~ adad:', adad)
+    adad.height = 16 * 2
+    adad.width = 16 * 2
     this.graphics.use(adad)
     // this.actions.rotateTo(Math.PI, Math.PI, ex.RotationType.CounterClockwise);
     this.actions.repeatForever((repeatCtx:any) => {
       repeatCtx.rotateTo(Math.PI+this.rotation , Math.PI*10, ex.RotationType.CounterClockwise);
-      // repeatCtx.moveBy(0, 10, 10)
     })
   }
 
