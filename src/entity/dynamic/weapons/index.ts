@@ -44,6 +44,7 @@ export class Sword extends ex.Actor {
   } 
   onCollisionStart(self: ex.Collider, other: ex.Collider, side: ex.Side, contact: ex.CollisionContact): void {
     if (other.owner.hasTag('monters')) {
+      other.owner.takeDamage(1)
       this.kill()
     }
   }

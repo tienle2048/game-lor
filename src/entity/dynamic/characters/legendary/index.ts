@@ -1,13 +1,14 @@
+import { Pet } from './../../pets/index';
 import {Keys, Input, Vector, Engine, Animation, CollisionType, Collider, Side, CollisionContact, Actor} from 'excalibur'
 import * as ex from 'excalibur'
 import {BaseHero} from '../baseHero'
 import {Images} from '../../../../resources'
 import {Sword} from '../../weapons'
-import { BambooMonter } from '../../monters/okla'
 
 export const PlayerCollisionGroup = ex.CollisionGroupManager.create('player')
 
 export class LegendHero extends BaseHero {
+  hp = 100
   weapon: Sword
   isAttack: boolean = false
   constructor(x: number, y: number) {
@@ -138,18 +139,20 @@ export class LegendHero extends BaseHero {
     if (engine.input.keyboard.wasReleased(ex.Input.Keys.Space)) {
       this.isAttack = false
     }
+
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.M)) {
+      // this.vel = ex.vec(0, 200)
+      this.onSummon(engine)
+    }
     if (this.vel.size === 0 && !this.isAttack) this.graphics.use('down-idle')
   }
 
   onCollisionStart(self: Collider, other: Collider, side: Side, contact: CollisionContact) {
-    // if (other.owner.hasTag('monters')) {
-      
-    //   (other.owner as BambooMonter).takeDamage(5)
-    // }
+    
   }
 
-  okla() {
-    console.log('dadadada', 'okla')
+  takeDamage(dame: number) {
+    this.hp -= dame
   }
 
   onAttack(engine: any) {
@@ -161,10 +164,18 @@ export class LegendHero extends BaseHero {
     if(!allMonter) return
     const {x, y} = this.pos
     const weapon = new Sword(this, x, y)
-    weapon.vel = allMonter.pos.sub(this.pos)
+    const ddd = allMonter.pos.sub(this.pos).normalize()
+    ddd.size = 300
+    weapon.vel =ddd
 
     engine.add(weapon)
     this.graphics.use('attack-left')
     this.isAttack = true
+  }
+
+  onSummon(engine:any){
+    const {x, y} = this.pos
+    const weapon = new Pet( x, y)
+    engine.add(weapon)
   }
 }
