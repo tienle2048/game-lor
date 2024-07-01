@@ -5,7 +5,6 @@ import {BaseMonter} from '../baseMonter'
 
 export const MonterCollisionGroup = ex.CollisionGroupManager.create('monter')
 export class BambooMonter extends BaseMonter {
-  hp: number = 10
   constructor(x: number, y: number) {
     super({
       x,
@@ -14,12 +13,13 @@ export class BambooMonter extends BaseMonter {
       height: 64,
       collisionType: CollisionType.Active,
       collisionGroup: MonterCollisionGroup,
-      collider: ex.Shape.Box(60, 60)
+      collider: ex.Shape.Box(60, 60),
+      hp: 10
     })
     // this.graphics.use(animation)
   }
   onInitialize(engine: Engine) {
-    this.addTag("monters")
+    this.addTag('monters')
     const playerSpriteSheet = ex.SpriteSheet.fromImageSource({
       image: Images.Bamboo,
       grid: {
@@ -119,24 +119,21 @@ export class BambooMonter extends BaseMonter {
     if (ad.size < 400) {
       this.vel = ad.normalize().scale(ex.vec(100, 100))
     }
-    if (this.hp <= 0) {
-      this.kill()
-    }
   }
 
   onCollisionStart(self: ex.Collider, other: ex.Collider, side: ex.Side, contact: ex.CollisionContact): void {
-    console.log("🚀 ~ BambooMonter ~ onCollisionStart ~ other:", other,other.owner.hasTag('weapons'))
+    console.log('🚀 ~ BambooMonter ~ onCollisionStart ~ other:', other, other.owner.hasTag('weapons'))
     if (other.owner.hasTag('weapons')) {
       // this.takeDamage(5)
     }
     if (other.owner.hasTag('player')) {
-        // console.log("dadadada",other)
-        other.owner.takeDamage(5)
-      }
+      // console.log("dadadada",other)
+      other.owner.takeDamage(3)
+    }
   }
 
   takeDamage(dame: number) {
-    console.log("🚀 ~ BambooMonter ~ takeDamage ~ dame:", dame)
+    console.log('🚀 ~ BambooMonter ~ takeDamage ~ dame:', dame)
     this.hp -= dame
   }
 }

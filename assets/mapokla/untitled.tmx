@@ -26,7 +26,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="object">
-  <object id="3" name="Player" type="player" x="204.117" y="276.84">
+  <object id="3" name="Player" type="player" x="23.1047" y="67.9792">
    <point/>
   </object>
   <object id="11" name="dadada" type="dadada" x="745.57" y="124.051">
@@ -47,7 +47,7 @@
   <object id="36" name="dadada" type="dadada" x="818.987" y="553.165">
    <point/>
   </object>
-  <object id="37" name="dadada" type="dadada" x="387.342" y="605.063">
+  <object id="37" name="dadada" type="dadada" x="768.354" y="377.215">
    <point/>
   </object>
   <object id="38" name="dadada" type="dadada" x="640.506" y="620.253">

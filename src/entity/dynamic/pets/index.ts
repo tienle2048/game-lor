@@ -3,10 +3,10 @@ import * as ex from 'excalibur'
 import {Images} from '../../../resources'
 import {Sword} from '../weapons'
 import {PlayerCollisionGroup} from '../characters'
+import { BaseDynamic } from '../BaseDynamic'
 
-export class Pet extends Actor {
+export class Pet extends BaseDynamic {
   isAttack: boolean = false
-  hp: number = 1
   cooldown: number = 800
   constructor(x: number, y: number) {
     super({
@@ -16,7 +16,8 @@ export class Pet extends Actor {
       height: 64,
       collisionType: CollisionType.Active,
       collisionGroup: PlayerCollisionGroup,
-      collider: ex.Shape.Box(60, 60)
+      collider: ex.Shape.Box(60, 60),
+      hp: 5
     })
   }
   onInitialize(engine: Engine) {
@@ -126,10 +127,6 @@ export class Pet extends Actor {
         this.onAttack(engine, allMonter)
         this.cooldown = 800
       }
-    }
-
-    if (this.hp <= 0) {
-      this.kill()
     }
   }
 

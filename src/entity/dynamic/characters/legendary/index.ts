@@ -8,7 +8,6 @@ import {Sword} from '../../weapons'
 export const PlayerCollisionGroup = ex.CollisionGroupManager.create('player')
 
 export class LegendHero extends BaseHero {
-  hp = 100
   weapon: Sword
   isAttack: boolean = false
   constructor(x: number, y: number) {
@@ -19,7 +18,8 @@ export class LegendHero extends BaseHero {
       height: 64,
       collisionType: CollisionType.Active,
       collisionGroup: PlayerCollisionGroup,
-      collider: ex.Shape.Box(60, 60)
+      collider: ex.Shape.Box(60, 60),
+      hp: 20
     })
     this.weapon = new Sword(this, 0, 0)
   }
