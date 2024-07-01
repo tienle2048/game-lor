@@ -1,7 +1,7 @@
 import {Keys, Input, Vector, Engine, Animation, CollisionType, Actor} from 'excalibur'
 import * as ex from 'excalibur'
 import {Images} from '../../../resources'
-
+// cossdadaddadada
 export class Sword extends ex.Actor {
   owner: Actor
   constructor(owneOklar: Actor, x: number, y: number) {
