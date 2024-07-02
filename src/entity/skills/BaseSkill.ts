@@ -21,7 +21,7 @@ export class BaseSkill {
     this.owner = config.owner
     this.dame = config.dame
     this.range = config.range
-    this.cooldown = config.cooldownConfig
+    this.cooldown = 0
     this.cooldownConfig = config.cooldownConfig
   }
 

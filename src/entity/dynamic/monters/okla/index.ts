@@ -5,6 +5,7 @@ import {BaseMonter} from '../baseMonter'
 
 export const MonterCollisionGroup = ex.CollisionGroupManager.create('monter')
 export class BambooMonter extends BaseMonter {
+  enemy: string
   constructor(x: number, y: number) {
     super({
       x,
@@ -14,9 +15,9 @@ export class BambooMonter extends BaseMonter {
       collisionType: CollisionType.Active,
       collisionGroup: MonterCollisionGroup,
       collider: ex.Shape.Box(60, 60),
-      hp: 10
+      hp: 20
     })
-    // this.graphics.use(animation)
+    this.enemy = 'player'
   }
   onInitialize(engine: Engine) {
     this.addTag('monters')
@@ -108,7 +109,7 @@ export class BambooMonter extends BaseMonter {
       // this.vel = ex.vec(0, 200)
       //   this.scene?.world.queryManager.getQuery
     }
-    const playersQuery = this.scene?.world.queryManager.createTagQuery(['player'])
+    const playersQuery = this.scene?.world.queryManager.createTagQuery([this.enemy])
 
     const nearbyPlayers = playersQuery?.getEntities((a: any, b: any) => {
       const spaceA = this.pos.sub(a.pos).size
@@ -126,7 +127,7 @@ export class BambooMonter extends BaseMonter {
     if (other.owner.hasTag('weapons')) {
     }
     if (other.owner.hasTag('player')) {
-      other.owner.takeDamage(3)
+      other.owner.takeDamage(1)
     }
   }
 }

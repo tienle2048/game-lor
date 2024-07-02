@@ -1,11 +1,11 @@
-import { Pet } from './../../pets/index';
+import {Pet} from './../../pets/index'
 import {Keys, Input, Vector, Engine, Animation, CollisionType, Collider, Side, CollisionContact, Actor} from 'excalibur'
 import * as ex from 'excalibur'
 import {BaseHero} from '../baseHero'
 import {Images} from '../../../../resources'
 import {Sword} from '../../weapons'
-import { QuayVongSkill } from '../../../skills';
-import { BaseSkill } from '../../../skills/BaseSkill';
+import {QuayVongSkill} from '../../../skills'
+import {BaseSkill} from '../../../skills/BaseSkill'
 
 export const PlayerCollisionGroup = ex.CollisionGroupManager.create('player')
 
@@ -151,25 +151,24 @@ export class LegendHero extends BaseHero {
       this.onSummon(engine)
     }
 
-    // if (engine.input.keyboard.wasPressed(ex.Input.Keys.K)) {
-    //   // this.vel = ex.vec(0, 200)
-    //   this.
-    // }
+    if (engine.input.keyboard.wasPressed(ex.Input.Keys.K)) {
+      // this.vel = ex.vec(0, 200)
+      this.removeTag('player')
+      this.addTag('monters')
+    }
     if (this.vel.size === 0 && !this.isAttack) this.graphics.use('down-idle')
   }
 
-  onCollisionStart(self: Collider, other: Collider, side: Side, contact: CollisionContact) {
-    
-  }
+  onCollisionStart(self: Collider, other: Collider, side: Side, contact: CollisionContact) {}
 
   onAttack(engine: any) {
-    const allMonter = this.scene?.world.queryManager.createTagQuery(['monters']).getEntities((a:any, b:any) => {
+    const allMonter = this.scene?.world.queryManager.createTagQuery(['monters']).getEntities((a: any, b: any) => {
       const spaceA = this.pos.sub(a.pos).size
       const spaceB = this.pos.sub(b.pos).size
-      return spaceA-spaceB
+      return spaceA - spaceB
     })[0] as Actor
-    if(!allMonter) return
-    this.skillaa.onAttack(engine,allMonter)
+    if (!allMonter) return
+    this.skillaa.onAttack(engine, allMonter)
     // const {x, y} = this.pos
     // const weapon = new Sword(x, y,5)
     // const ddd = allMonter.pos.sub(this.pos).normalize()
@@ -181,9 +180,9 @@ export class LegendHero extends BaseHero {
     this.isAttack = true
   }
 
-  onSummon(engine:any){
+  onSummon(engine: any) {
     const {x, y} = this.pos
-    const weapon = new Pet( x, y)
+    const weapon = new Pet(x, y)
     engine.add(weapon)
   }
 }

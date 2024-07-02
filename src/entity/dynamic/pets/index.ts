@@ -4,7 +4,7 @@ import {Images} from '../../../resources'
 import {Sword} from '../weapons'
 import {PlayerCollisionGroup} from '../characters'
 import {BaseDynamic} from '../BaseDynamic'
-import {QuayVongSkill, ShurikenSkill, ThunderSkill} from '../../skills'
+import {HypnosisSkill, QuayVongSkill, ShurikenSkill, ThunderSkill} from '../../skills'
 
 export class Pet extends BaseDynamic {
   constructor(x: number, y: number) {
@@ -31,6 +31,11 @@ export class Pet extends BaseDynamic {
         dame: 3
       }),
       new QuayVongSkill({
+        levelSkill: 0,
+        owner: this,
+        dame: 3
+      }),
+      new HypnosisSkill({
         levelSkill: 0,
         owner: this,
         dame: 3
