@@ -4,12 +4,14 @@ import * as ex from 'excalibur'
 import {BaseHero} from '../baseHero'
 import {Images} from '../../../../resources'
 import {Sword} from '../../weapons'
+import { QuayVongSkill } from '../../../skills';
+import { BaseSkill } from '../../../skills/BaseSkill';
 
 export const PlayerCollisionGroup = ex.CollisionGroupManager.create('player')
 
 export class LegendHero extends BaseHero {
-  weapon: Sword
   isAttack: boolean = false
+  skillaa: BaseSkill
   constructor(x: number, y: number) {
     super({
       x,
@@ -21,7 +23,11 @@ export class LegendHero extends BaseHero {
       collider: ex.Shape.Box(60, 60),
       hp: 20
     })
-    this.weapon = new Sword(this, 0, 0)
+    this.skillaa = new QuayVongSkill({
+      levelSkill: 0,
+      owner: this,
+      dame: 3
+    })
   }
   onInitialize(engine: Engine) {
     this.addTag('player')
@@ -144,15 +150,16 @@ export class LegendHero extends BaseHero {
       // this.vel = ex.vec(0, 200)
       this.onSummon(engine)
     }
+
+    // if (engine.input.keyboard.wasPressed(ex.Input.Keys.K)) {
+    //   // this.vel = ex.vec(0, 200)
+    //   this.
+    // }
     if (this.vel.size === 0 && !this.isAttack) this.graphics.use('down-idle')
   }
 
   onCollisionStart(self: Collider, other: Collider, side: Side, contact: CollisionContact) {
     
-  }
-
-  takeDamage(dame: number) {
-    this.hp -= dame
   }
 
   onAttack(engine: any) {
@@ -162,13 +169,14 @@ export class LegendHero extends BaseHero {
       return spaceA-spaceB
     })[0] as Actor
     if(!allMonter) return
-    const {x, y} = this.pos
-    const weapon = new Sword(this, x, y)
-    const ddd = allMonter.pos.sub(this.pos).normalize()
-    ddd.size = 300
-    weapon.vel =ddd
+    this.skillaa.onAttack(engine,allMonter)
+    // const {x, y} = this.pos
+    // const weapon = new Sword(x, y,5)
+    // const ddd = allMonter.pos.sub(this.pos).normalize()
+    // ddd.size = 300
+    // weapon.vel =ddd
 
-    engine.add(weapon)
+    // engine.add(weapon)
     this.graphics.use('attack-left')
     this.isAttack = true
   }

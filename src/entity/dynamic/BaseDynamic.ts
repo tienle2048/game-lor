@@ -1,5 +1,6 @@
-import {Actor, Color, vec, ActorArgs, Rectangle} from 'excalibur'
+import {Actor, Color, vec, ActorArgs, Rectangle, RotationType} from 'excalibur'
 import {BaseEntity} from '../BaseEntity'
+import { BaseSkill } from '../skills/BaseSkill'
 
 export class HPBar extends Actor {
   owner: BaseDynamic
@@ -8,7 +9,8 @@ export class HPBar extends Actor {
   constructor(owner: BaseDynamic, maxHp: number) {
     super({
       pos: vec(-30, -48),
-
+      // width: 100,
+      // height: 10,
       color: Color.Red,
       z: 100
     })
@@ -32,7 +34,11 @@ export class HPBar extends Actor {
     )
   }
 
-  onInitialize() {}
+  // onInitialize() {
+  //   this.actions.repeatForever((repeatCtx:any) => {
+  //     repeatCtx.rotateTo(Math.PI+this.rotation , Math.PI, RotationType.CounterClockwise);
+  //   })
+  // }
 
   onPreUpdate(engine: ex.Engine, elapsedMs: number): void {
     const dada = (this.owner.hp / this.maxHp) * 60
@@ -50,9 +56,13 @@ interface BaseDynamicParams {
 
 export class BaseDynamic extends BaseEntity {
   hp: number
+  skill: BaseSkill[] = []
   constructor(prams: ActorArgs & BaseDynamicParams) {
     super(prams)
     this.addChild(new HPBar(this, prams.hp))
     this.hp = prams.hp
+  }
+  takeDamage(dame: number) {
+    this.hp -= dame
   }
 }

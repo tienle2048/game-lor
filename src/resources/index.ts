@@ -22,6 +22,10 @@ const Images: Record<string, ImageSource> = {
   Axe: new ImageSource('./assets/Items/Weapons/Axe/SpriteInHand.png'),
   Shuriken: new ImageSource('./assets/Ui/Shuriken.png'),
 
+
+  // fx 
+  Thunder: new ImageSource('./assets/FX/Elemental/Thunder/SpriteSheet.png'),
+
   // tile
   TilesetNature: new ImageSource('./assets/Backgrounds/Tilesets/TilesetNature.png'),
 

@@ -1,13 +1,12 @@
-import {Keys, Input, Vector, Engine, Animation, CollisionType, Collider, Side, CollisionContact, Actor} from 'excalibur'
+import {Keys, Input, Vector, Engine, Animation, RotationType, CollisionType, Collider, Side, CollisionContact, Actor} from 'excalibur'
 import * as ex from 'excalibur'
 import {Images} from '../../../resources'
 import {Sword} from '../weapons'
 import {PlayerCollisionGroup} from '../characters'
-import { BaseDynamic } from '../BaseDynamic'
+import {BaseDynamic} from '../BaseDynamic'
+import {QuayVongSkill, ShurikenSkill, ThunderSkill} from '../../skills'
 
 export class Pet extends BaseDynamic {
-  isAttack: boolean = false
-  cooldown: number = 800
   constructor(x: number, y: number) {
     super({
       x: x + 64,
@@ -19,12 +18,29 @@ export class Pet extends BaseDynamic {
       collider: ex.Shape.Box(60, 60),
       hp: 5
     })
+    this.skill = [
+      new ShurikenSkill({
+        weapon: Sword,
+        levelSkill: 0,
+        owner: this,
+        dame: 1
+      }),
+      new ThunderSkill({
+        levelSkill: 0,
+        owner: this,
+        dame: 3
+      }),
+      new QuayVongSkill({
+        levelSkill: 0,
+        owner: this,
+        dame: 3
+      })
+    ]
   }
   onInitialize(engine: Engine) {
     this.addTag('player')
-    // this.addChild(this.weapon)
     const playerSpriteSheet = ex.SpriteSheet.fromImageSource({
-      image: Images.Monk2,
+      image: Images.CamouflageRed,
       grid: {
         spriteWidth: 16,
         spriteHeight: 16,
@@ -103,12 +119,14 @@ export class Pet extends BaseDynamic {
 
     const attackLeft = playerSpriteSheet.getSprite(3, 4)
     attackLeft.scale = ex.vec(4, 4)
-    this.graphics.add('attack-left', attackLeft)
+    // this.graphics.add('attack-left', attackLeft)
+    //   this.actions.repeatForever((repeatCtx:any) => {
+    //   repeatCtx.rotateTo(Math.PI+this.rotation , Math.PI, RotationType.CounterClockwise);
+    // })
   }
 
   onPreUpdate(engine: ex.Engine, elapsedMs: number): void {
-    this.cooldown -= elapsedMs
-    if (this.vel.size === 0 && !this.isAttack) this.graphics.use('down-idle')
+    if (this.vel.size === 0) this.graphics.use('down-idle')
     const allMonter = this.scene?.world.queryManager.createTagQuery(['monters']).getEntities((a: any, b: any) => {
       const spaceA = this.pos.sub(a.pos).size
       const spaceB = this.pos.sub(b.pos).size
@@ -117,15 +135,17 @@ export class Pet extends BaseDynamic {
     if (!allMonter) return
 
     const space = allMonter.pos.sub(this.pos)
-    if (space.size > 200) {
-      const ad = allMonter.pos.sub(this.pos)
-      this.vel = ad.normalize().scale(ex.vec(100, 100))
-      this.isAttack = false
-    } else {
-      this.vel = Vector.Zero
-      if (this.cooldown <= 0) {
-        this.onAttack(engine, allMonter)
-        this.cooldown = 800
+    for (let skill of this.skill) {
+      skill.updateCooldown(skill.cooldown - elapsedMs)
+      if (space.size > skill.range) {
+        const ad = allMonter.pos.sub(this.pos)
+        this.vel = ad.normalize().scale(ex.vec(100, 100))
+      } else {
+        this.vel = Vector.Zero
+        if (skill.cooldown <= 0) {
+          skill.onAttack(engine, allMonter)
+          skill.updateCooldown(skill.cooldownConfig)
+        }
       }
     }
   }
@@ -134,15 +154,10 @@ export class Pet extends BaseDynamic {
 
   onAttack(engine: any, monter: any) {
     const {x, y} = this.pos
-    const weapon = new Sword(this, x, y)
+    const weapon = new Sword(x, y, 1)
     weapon.vel = monter.pos.sub(this.pos)
 
     engine.add(weapon)
     this.graphics.use('attack-left')
-    this.isAttack = true
-  }
-
-  takeDamage(dame: number) {
-    this.hp -= dame
   }
 }

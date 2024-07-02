@@ -124,16 +124,9 @@ export class BambooMonter extends BaseMonter {
   onCollisionStart(self: ex.Collider, other: ex.Collider, side: ex.Side, contact: ex.CollisionContact): void {
     console.log('🚀 ~ BambooMonter ~ onCollisionStart ~ other:', other, other.owner.hasTag('weapons'))
     if (other.owner.hasTag('weapons')) {
-      // this.takeDamage(5)
     }
     if (other.owner.hasTag('player')) {
-      // console.log("dadadada",other)
       other.owner.takeDamage(3)
     }
-  }
-
-  takeDamage(dame: number) {
-    console.log('🚀 ~ BambooMonter ~ takeDamage ~ dame:', dame)
-    this.hp -= dame
   }
 }
