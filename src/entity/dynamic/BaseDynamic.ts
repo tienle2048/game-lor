@@ -33,13 +33,6 @@ export class HPBar extends Actor {
       })
     )
   }
-
-  // onInitialize() {
-  //   this.actions.repeatForever((repeatCtx:any) => {
-  //     repeatCtx.rotateTo(Math.PI+this.rotation , Math.PI, RotationType.CounterClockwise);
-  //   })
-  // }
-
   onPreUpdate(engine: ex.Engine, elapsedMs: number): void {
     const dada = (this.owner.hp / this.maxHp) * 60
 

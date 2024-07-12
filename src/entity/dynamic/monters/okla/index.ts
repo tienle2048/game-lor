@@ -2,6 +2,8 @@ import {Keys, Input, Vector, Engine, Animation, CollisionType, Actor} from 'exca
 import * as ex from 'excalibur'
 import {Images} from '../../../../resources'
 import {BaseMonter} from '../baseMonter'
+import { ShurikenSkill, ThunderSkill } from '../../../skills'
+import { Sword, SwordOkla } from '../../weapons'
 
 export const MonterCollisionGroup = ex.CollisionGroupManager.create('monter')
 export class BambooMonter extends BaseMonter {
@@ -18,6 +20,13 @@ export class BambooMonter extends BaseMonter {
       hp: 20
     })
     this.enemy = 'player'
+    this.skill = [
+      // new ThunderSkill({
+      //   levelSkill: 0,
+      //   owner: this,
+      //   dame: 3
+      // }),
+    ]
   }
   onInitialize(engine: Engine) {
     this.addTag('monters')
@@ -101,7 +110,6 @@ export class BambooMonter extends BaseMonter {
   }
 
   onPreUpdate(engine: ex.Engine, elapsedMs: number): void {
-    this.vel = ex.Vector.Zero
 
     this.graphics.use('down-idle')
 
@@ -117,17 +125,43 @@ export class BambooMonter extends BaseMonter {
       return spaceA - spaceB
     })[0] as Actor
     const ad = nearbyPlayers.pos.sub(this.pos)
-    if (ad.size < 400) {
-      this.vel = ad.normalize().scale(ex.vec(100, 100))
+    // if (ad.size < 400) {
+      this.vel = ad.normalize().scale(ex.vec(200, 200))
+    // }
+
+
+    const allMonter = this.scene?.world.queryManager.createTagQuery(['player']).getEntities((a: any, b: any) => {
+      const spaceA = this.pos.sub(a.pos).size
+      const spaceB = this.pos.sub(b.pos).size
+      return spaceA - spaceB
+    })[0] as Actor
+    if (!allMonter) return
+
+    const space = allMonter.pos.sub(this.pos)
+    for (let skill of this.skill) {
+      skill.updateCooldown(skill.cooldown - elapsedMs)
+      if (space.size > skill.range) {
+        const ad = allMonter.pos.sub(this.pos)
+        this.vel = ad.normalize().scale(ex.vec(100, 100))
+      } else {
+        this.vel = Vector.Zero
+        if (skill.cooldown <= 0) {
+          skill.onAttack(engine, allMonter)
+          skill.updateCooldown(skill.cooldownConfig)
+        }
+      }
     }
   }
 
   onCollisionStart(self: ex.Collider, other: ex.Collider, side: ex.Side, contact: ex.CollisionContact): void {
-    console.log('🚀 ~ BambooMonter ~ onCollisionStart ~ other:', other, other.owner.hasTag('weapons'))
     if (other.owner.hasTag('weapons')) {
     }
     if (other.owner.hasTag('player')) {
       other.owner.takeDamage(1)
     }
+  }
+
+  setVector(okla:Vector){
+    this.vel = ex.vec(0, 200)
   }
 }

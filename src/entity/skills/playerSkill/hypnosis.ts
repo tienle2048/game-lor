@@ -11,15 +11,15 @@ export class HypnosisSkill extends BaseSkill {
   }
 
   onAttack(engine: Engine, target: BaseDynamic) {
-    target.removeTag('monters')
-    target.addTag('player')
-    target.enemy = 'monters'
+    // target.removeTag('monters')
+    // target.addTag('player')
+    // target.enemy = 'monters'
     
 
-    setTimeout(() => {
-      target.removeTag('player')
-      target.addTag('monters')
-      target.enemy = 'player'
-    }, 3000)
+    // setTimeout(() => {
+    //   target.removeTag('player')
+    //   target.addTag('monters')
+    //   target.enemy = 'player'
+    // }, 3000)
   }
 }

@@ -3,9 +3,9 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "untitled.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
-        "."
+        "/Users/tienle/Documents/emyeukhoahoc/game/du-an-trieu-do/assets"
     ],
     "fileStates": {
         "TilesetFloor.tsx": {
@@ -24,7 +24,6 @@
     "last.imagePath": "/Users/tienle/Documents/emyeukhoahoc/game/game-sieu-hay/assets/Backgrounds/Tilesets",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
-        "untitled.tmx"
     ],
     "project": "untitled.tiled-project",
     "property.type": "bool",

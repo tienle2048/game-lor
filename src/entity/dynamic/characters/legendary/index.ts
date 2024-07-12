@@ -4,14 +4,13 @@ import * as ex from 'excalibur'
 import {BaseHero} from '../baseHero'
 import {Images} from '../../../../resources'
 import {Sword} from '../../weapons'
-import {QuayVongSkill} from '../../../skills'
+import {QuayVongSkill, ShurikenSkill} from '../../../skills'
 import {BaseSkill} from '../../../skills/BaseSkill'
 
 export const PlayerCollisionGroup = ex.CollisionGroupManager.create('player')
-
+const speedPlayer = 400
 export class LegendHero extends BaseHero {
   isAttack: boolean = false
-  skillaa: BaseSkill
   constructor(x: number, y: number) {
     super({
       x,
@@ -21,17 +20,28 @@ export class LegendHero extends BaseHero {
       collisionType: CollisionType.Active,
       collisionGroup: PlayerCollisionGroup,
       collider: ex.Shape.Box(60, 60),
+      name: 'Legend',
       hp: 20
     })
-    this.skillaa = new QuayVongSkill({
-      levelSkill: 0,
-      owner: this,
-      dame: 3
-    })
+    this.skill = [
+      new ShurikenSkill({
+        weapon: Sword,
+        levelSkill: 1,
+        owner: this,
+        dame: 5
+      }),
+      // new QuayVongSkill({
+      //   levelSkill: 0,
+      //   owner: this,
+      //   dame: 5
+      // }),
+    ]
   }
   onInitialize(engine: Engine) {
+    for (let skill of this.skill) {
+      if(skill.onInit) skill.onInit()
+    }
     this.addTag('player')
-    // this.addChild(this.weapon)
     const playerSpriteSheet = ex.SpriteSheet.fromImageSource({
       image: Images.Cavegirl2,
       grid: {
@@ -119,35 +129,30 @@ export class LegendHero extends BaseHero {
     this.vel = ex.Vector.Zero
 
     if (engine.input.keyboard.isHeld(ex.Input.Keys.D)) {
-      this.vel = ex.vec(200, 0)
+      this.vel = ex.vec(speedPlayer, 0)
       this.graphics.use('right-walk')
     }
     if (engine.input.keyboard.isHeld(ex.Input.Keys.A)) {
-      this.vel = ex.vec(-200, 0)
+      this.vel = ex.vec(-speedPlayer, 0)
       this.graphics.use('left-walk')
     }
     if (engine.input.keyboard.isHeld(ex.Input.Keys.W)) {
-      this.vel = ex.vec(0, -200)
+      this.vel = ex.vec(0, -speedPlayer)
       this.graphics.use('up-walk')
     }
     if (engine.input.keyboard.isHeld(ex.Input.Keys.S)) {
-      this.vel = ex.vec(0, 200)
+      this.vel = ex.vec(0, speedPlayer)
       this.graphics.use('down-walk')
     }
-    // if (engine.input.keyboard.isHeld(ex.Input.Keys.O)) {
-    //   this.weapon.vel = ex.vec(0,400)
-    // }
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space)) {
-      // this.vel = ex.vec(0, 200)
       this.onAttack(engine)
     }
 
     if (engine.input.keyboard.wasReleased(ex.Input.Keys.Space)) {
-      this.isAttack = false
+      this.onUpdateSkill("dad")
     }
 
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.M)) {
-      // this.vel = ex.vec(0, 200)
       this.onSummon(engine)
     }
 
@@ -157,6 +162,31 @@ export class LegendHero extends BaseHero {
       this.addTag('monters')
     }
     if (this.vel.size === 0 && !this.isAttack) this.graphics.use('down-idle')
+
+    const allMonter = this.scene?.world.queryManager.createTagQuery(['monters']).getEntities((a: any, b: any) => {
+      const spaceA = this.pos.sub(a.pos).size
+      const spaceB = this.pos.sub(b.pos).size
+      return spaceA - spaceB
+    })[0] as Actor
+    if (!allMonter) return
+
+    const space = allMonter.pos.sub(this.pos)
+
+
+    for (let skill of this.skill) {
+      skill.updateCooldown(skill.cooldown - elapsedMs)
+      if (space.size > skill.range) {
+  
+      } else {
+        
+        if (skill.cooldown <= 0) {
+          skill.onAttack(engine, allMonter)
+          skill.updateCooldown(skill.cooldownConfig)
+        }
+      }
+    }
+
+
   }
 
   onCollisionStart(self: Collider, other: Collider, side: Side, contact: CollisionContact) {}
@@ -168,21 +198,27 @@ export class LegendHero extends BaseHero {
       return spaceA - spaceB
     })[0] as Actor
     if (!allMonter) return
-    this.skillaa.onAttack(engine, allMonter)
-    // const {x, y} = this.pos
+    const {x, y} = this.pos
+
+   
     // const weapon = new Sword(x, y,5)
     // const ddd = allMonter.pos.sub(this.pos).normalize()
     // ddd.size = 300
     // weapon.vel =ddd
 
     // engine.add(weapon)
-    this.graphics.use('attack-left')
-    this.isAttack = true
+    // this.graphics.use('attack-left')
+    // this.isAttack = true
   }
 
   onSummon(engine: any) {
     const {x, y} = this.pos
     const weapon = new Pet(x, y)
     engine.add(weapon)
+  }
+
+  onUpdateSkill(skill:string){
+    console.log("🚀 ~ LegendHero ~ onUpdateSkill ~ skill:", skill)
+    this.skill[0].update()
   }
 }

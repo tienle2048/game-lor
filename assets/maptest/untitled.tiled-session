@@ -1,0 +1,86 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "dadadada.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "TilesetField.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TilesetFloor.tsx": {
+            "scaleInDock": 0.0156,
+            "scaleInEditor": 1
+        },
+        "TilesetFloorB.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TilesetWater.tsx": {
+            "scaleInDock": 3.6199,
+            "scaleInEditor": 1
+        },
+        "dadadada.tmx": {
+            "scale": 3.6664,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -27.956578660266196,
+                "y": -15.410211651756484
+            }
+        },
+        "mapokla.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.4,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 956.25,
+                "y": 446.25
+            }
+        },
+        "nine_path_2.tsx": {
+            "scaleInDock": 7.184,
+            "scaleInEditor": 7.27
+        },
+        "untitled.tmx": {
+            "scale": 1.52,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 104.93421052631581,
+                "y": 162.82894736842107
+            }
+        }
+    },
+    "last.imagePath": "/Users/tienle/Documents/emyeukhoahoc/game/game-sieu-hay/assets/Ui/Theme",
+    "map.height": 150,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 1,
+    "map.tileWidth": 1,
+    "map.width": 100,
+    "openFiles": [
+        "mapokla.tmx",
+        "nine_path_2.tsx",
+        "dadadada.tmx"
+    ],
+    "project": "untitled.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "mapokla.tmx",
+        "nine_path_2.tsx",
+        "dadadada.tmx",
+        "TilesetFloor.tsx",
+        "TilesetWater.tsx",
+        "TilesetField.tsx",
+        "TilesetFloorB.tsx",
+        "untitled.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 1,
+        "width": 1
+    }
+}
