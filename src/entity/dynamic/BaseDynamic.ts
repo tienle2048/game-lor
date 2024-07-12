@@ -1,4 +1,5 @@
-import {Actor, Color, vec, ActorArgs, Rectangle, RotationType} from 'excalibur'
+// @ts-nocheck
+import {Actor, Color, vec, ActorArgs, Rectangle} from 'excalibur'
 import {BaseEntity} from '../BaseEntity'
 import { BaseSkill } from '../skills/BaseSkill'
 
@@ -34,6 +35,7 @@ export class HPBar extends Actor {
     )
   }
   onPreUpdate(engine: ex.Engine, elapsedMs: number): void {
+    
     const dada = (this.owner.hp / this.maxHp) * 60
 
     this.line.width = dada

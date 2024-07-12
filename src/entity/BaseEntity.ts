@@ -1,3 +1,3 @@
-import {Actor, Color, Engine, vec} from 'excalibur'
+import {Actor} from 'excalibur'
 export class BaseEntity extends Actor {
 }

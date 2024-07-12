@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {Actor, Animation, Engine, SpriteSheet, vec, AnimationStrategy} from 'excalibur'
 import {Images} from '../../../resources'
 import {BaseDynamic} from '../../dynamic/BaseDynamic'

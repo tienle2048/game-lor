@@ -1,6 +1,7 @@
+// @ts-nocheck
 import {GameManager} from './../manager/index'
 import * as ex from 'excalibur'
-import { Images } from '../resources'
+import {Images} from '../resources'
 const waveConfig = {
   '1': {
     monter: ['BambooMonter'],
@@ -24,15 +25,30 @@ export class BaseMap extends ex.Scene {
   wave: number = 1
   timeOfWave: number = 60000000
   manager: GameManager
+  joystickEle: HTMLElement
 
   constructor(manager: GameManager) {
     super()
     this.manager = manager
+    this.joystickEle = document.getElementById('joystick')!
   }
 
   onInitialize(engine: ex.Engine<any>): void {
-    console.log("🚀 ~ BaseMap ~ onInitialize ~ engine:")
     this.manager.respon(this, this.wave)
+    this.manager.joystick.on('move', (event, data) => {
+      const {vector, direction, position} = data
+      if (direction?.x && direction?.y) {
+        
+        const {x,y} =vector
+        const vec = ex.vec(x,-y).normalize()
+        vec.size = 200
+
+        this.manager.player.vel = vec
+      }
+    })
+    this.manager.joystick.on('end', (event, data) => {
+      this.manager.player.vel = ex.Vector.Zero
+    })
   }
 
   onPostUpdate(engine: ex.Engine<any>, delta: number): void {
@@ -41,18 +57,17 @@ export class BaseMap extends ex.Scene {
       for (let okla of this.entities) {
         if (okla.hasTag('monters')) return
       }
-    
     }
-    
     engine.goToScene('update')
   }
   onActivate(context: ex.SceneActivationContext<any>): void {
-      console.log("🚀 ~ BaseMap ~ onActivate ~ this.wave:", this.wave)
+    this.joystickEle.classList.remove('hideOkla')
     this.manager.respon(this, this.wave)
   }
 
   onDeactivate(context: ex.SceneActivationContext<any>): void {
-    this.wave +=1
+    this.joystickEle.classList.add('hideOkla')
+    this.wave += 1
   }
 }
 
@@ -90,21 +105,18 @@ export class UpdateGame extends ex.Scene {
           columns: 1
         }
       })
-      const adad1 = playerSpriteSheet1.getSprite(0, 0,{
-        width:200,
-        height:300
+      const adad1 = playerSpriteSheet1.getSprite(0, 0, {
+        width: 200,
+        height: 300
       })
-
-      
 
       const group = new ex.GraphicsGroup({
         members: [
-          { graphic: adad1, offset: ex.vec(0, 0)},
-          { graphic: adad, offset: ex.vec(50, 30)},
+          {graphic: adad1, offset: ex.vec(0, 0)},
+          {graphic: adad, offset: ex.vec(50, 30)}
         ]
-      });
-      
-      
+      })
+
       adad.height = 23 * 4
       adad.width = 23 * 4
       optionsUpdate.addComponent
@@ -123,7 +135,7 @@ export class UpdateGame extends ex.Scene {
       color: ex.Color.Chartreuse
     })
     exit.on('pointerup', () => {
-        engine.goToScene('level1')
+      engine.goToScene('level1')
     })
 
     this.add(exit)

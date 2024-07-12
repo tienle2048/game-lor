@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "local": "vite --host 0.0.0.0",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -15,6 +16,7 @@
   "dependencies": {
     "@excaliburjs/plugin-tiled": "^0.29.2",
     "excalibur": "^0.29.3",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "nipplejs": "^0.10.2"
   }
 }

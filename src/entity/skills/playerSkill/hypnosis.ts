@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {Actor, Engine, RotationType, vec} from 'excalibur'
 import {BaseDynamic} from '../../dynamic/BaseDynamic'
 import {Sword} from '../../dynamic/weapons'

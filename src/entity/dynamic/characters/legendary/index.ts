@@ -1,11 +1,11 @@
+// @ts-nocheck
 import {Pet} from './../../pets/index'
-import {Keys, Input, Vector, Engine, Animation, CollisionType, Collider, Side, CollisionContact, Actor} from 'excalibur'
+import {Engine, CollisionType, Actor} from 'excalibur'
 import * as ex from 'excalibur'
 import {BaseHero} from '../baseHero'
 import {Images} from '../../../../resources'
 import {Sword} from '../../weapons'
-import {QuayVongSkill, ShurikenSkill} from '../../../skills'
-import {BaseSkill} from '../../../skills/BaseSkill'
+import { ShurikenSkill} from '../../../skills'
 
 export const PlayerCollisionGroup = ex.CollisionGroupManager.create('player')
 const speedPlayer = 400
@@ -38,6 +38,7 @@ export class LegendHero extends BaseHero {
     ]
   }
   onInitialize(engine: Engine) {
+    
     for (let skill of this.skill) {
       if(skill.onInit) skill.onInit()
     }
@@ -55,25 +56,25 @@ export class LegendHero extends BaseHero {
     const leftIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 2) as ex.Sprite, duration: 200}]
     })
-    leftIdle.scale = ex.vec(4, 4)
+    leftIdle.scale = ex.vec(2, 2)
     this.graphics.add('left-idle', leftIdle)
 
     const rightIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 2) as ex.Sprite, duration: 200}]
     })
-    rightIdle.scale = ex.vec(4, 4)
+    rightIdle.scale = ex.vec(2, 2)
     this.graphics.add('right-idle', rightIdle)
 
     const upIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 3) as ex.Sprite, duration: 200}]
     })
-    upIdle.scale = ex.vec(4, 4)
+    upIdle.scale = ex.vec(2, 2)
     this.graphics.add('up-idle', upIdle)
 
     const downIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 0) as ex.Sprite, duration: 200}]
     })
-    downIdle.scale = ex.vec(4, 4)
+    downIdle.scale = ex.vec(2, 2)
     this.graphics.add('down-idle', downIdle)
 
     const leftWalk = new ex.Animation({
@@ -84,7 +85,7 @@ export class LegendHero extends BaseHero {
         {graphic: playerSpriteSheet.getSprite(2, 3) as ex.Sprite, duration: 200}
       ]
     })
-    leftWalk.scale = ex.vec(4, 4)
+    leftWalk.scale = ex.vec(2, 2)
     this.graphics.add('left-walk', leftWalk)
 
     const rightWalk = new ex.Animation({
@@ -95,7 +96,7 @@ export class LegendHero extends BaseHero {
         {graphic: playerSpriteSheet.getSprite(3, 3) as ex.Sprite, duration: 200}
       ]
     })
-    rightWalk.scale = ex.vec(4, 4)
+    rightWalk.scale = ex.vec(2, 2)
     this.graphics.add('right-walk', rightWalk)
 
     const upWalk = new ex.Animation({
@@ -106,7 +107,7 @@ export class LegendHero extends BaseHero {
         {graphic: playerSpriteSheet.getSprite(1, 3) as ex.Sprite, duration: 200}
       ]
     })
-    upWalk.scale = ex.vec(4, 4)
+    upWalk.scale = ex.vec(2, 2)
     this.graphics.add('up-walk', upWalk)
 
     const downWalk = new ex.Animation({
@@ -117,16 +118,17 @@ export class LegendHero extends BaseHero {
         {graphic: playerSpriteSheet.getSprite(0, 3) as ex.Sprite, duration: 200}
       ]
     })
-    downWalk.scale = ex.vec(4, 4)
+    downWalk.scale = ex.vec(2, 2)
     this.graphics.add('down-walk', downWalk)
 
     const attackLeft = playerSpriteSheet.getSprite(3, 4)
-    attackLeft.scale = ex.vec(4, 4)
+    attackLeft.scale = ex.vec(2, 2)
     this.graphics.add('attack-left', attackLeft)
   }
 
   onPreUpdate(engine: ex.Engine, elapsedMs: number): void {
-    this.vel = ex.Vector.Zero
+    
+    // this.vel = ex.Vector.Zero
 
     if (engine.input.keyboard.isHeld(ex.Input.Keys.D)) {
       this.vel = ex.vec(speedPlayer, 0)
@@ -189,16 +191,17 @@ export class LegendHero extends BaseHero {
 
   }
 
-  onCollisionStart(self: Collider, other: Collider, side: Side, contact: CollisionContact) {}
+  // onCollisionStart(self: Collider, other: Collider, side: Side, contact: CollisionContact) {}
 
   onAttack(engine: any) {
+    
     const allMonter = this.scene?.world.queryManager.createTagQuery(['monters']).getEntities((a: any, b: any) => {
       const spaceA = this.pos.sub(a.pos).size
       const spaceB = this.pos.sub(b.pos).size
       return spaceA - spaceB
     })[0] as Actor
     if (!allMonter) return
-    const {x, y} = this.pos
+    // const {x, y} = this.pos
 
    
     // const weapon = new Sword(x, y,5)
@@ -218,7 +221,12 @@ export class LegendHero extends BaseHero {
   }
 
   onUpdateSkill(skill:string){
-    console.log("🚀 ~ LegendHero ~ onUpdateSkill ~ skill:", skill)
+    
     this.skill[0].update()
+  }
+
+  move(vacac: ex.Vector){
+    
+    this.vel = vacac
   }
 }

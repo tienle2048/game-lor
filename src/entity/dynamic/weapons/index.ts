@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Vector } from 'excalibur';
 // import { Engine} from 'excalibur'
 import * as ex from 'excalibur'

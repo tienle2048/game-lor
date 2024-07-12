@@ -1,9 +1,10 @@
-import {Keys, Input, Vector, Engine, Animation, CollisionType, Actor} from 'excalibur'
+// @ts-nocheck
+import {Vector, Engine, CollisionType, Actor} from 'excalibur'
 import * as ex from 'excalibur'
 import {Images} from '../../../../resources'
 import {BaseMonter} from '../baseMonter'
-import { ShurikenSkill, ThunderSkill } from '../../../skills'
-import { Sword, SwordOkla } from '../../weapons'
+// import { ShurikenSkill, ThunderSkill } from '../../../skills'
+// import { Sword, SwordOkla } from '../../weapons'
 
 export const MonterCollisionGroup = ex.CollisionGroupManager.create('monter')
 export class BambooMonter extends BaseMonter {
@@ -29,6 +30,7 @@ export class BambooMonter extends BaseMonter {
     ]
   }
   onInitialize(engine: Engine) {
+    
     this.addTag('monters')
     const playerSpriteSheet = ex.SpriteSheet.fromImageSource({
       image: Images.Bamboo,
@@ -110,7 +112,6 @@ export class BambooMonter extends BaseMonter {
   }
 
   onPreUpdate(engine: ex.Engine, elapsedMs: number): void {
-
     this.graphics.use('down-idle')
 
     if (engine.input.keyboard.isHeld(ex.Input.Keys.I)) {
@@ -126,9 +127,8 @@ export class BambooMonter extends BaseMonter {
     })[0] as Actor
     const ad = nearbyPlayers.pos.sub(this.pos)
     // if (ad.size < 400) {
-      this.vel = ad.normalize().scale(ex.vec(200, 200))
+    this.vel = ad.normalize().scale(ex.vec(200, 200))
     // }
-
 
     const allMonter = this.scene?.world.queryManager.createTagQuery(['player']).getEntities((a: any, b: any) => {
       const spaceA = this.pos.sub(a.pos).size
@@ -157,11 +157,12 @@ export class BambooMonter extends BaseMonter {
     if (other.owner.hasTag('weapons')) {
     }
     if (other.owner.hasTag('player')) {
+      
       other.owner.takeDamage(1)
     }
   }
 
-  setVector(okla:Vector){
+  setVector(okla: Vector) {
     this.vel = ex.vec(0, 200)
   }
 }

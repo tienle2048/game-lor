@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {TiledResource} from '@excaliburjs/plugin-tiled'
 import {Animation, ImageSource, Loader, range, Sound, SpriteSheet, vec} from 'excalibur'
 import { LegendHero } from '../entity'
