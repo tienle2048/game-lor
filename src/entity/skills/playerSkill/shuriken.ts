@@ -35,9 +35,9 @@ export class ShurikenSkill extends BaseSkill {
     this.weapon = config.weapon
   }
 
-  onAttack(engine: Engine, target: BaseDynamic) {
+  onAttack(engine: Engine, targets: BaseDynamic) {
     const {x, y} = this.owner.pos
-    const vecCenter = target.pos.sub(this.owner.pos).normalize()
+    const vecCenter = targets[0].pos.sub(this.owner.pos).normalize()
     const numbulet = configSkill[String(this.levelSkill)] ? configSkill[String(this.levelSkill)].numBullets : 9
     const unit = numbulet !== 1 ? gocban*2 / (numbulet - 1) : 1
     const start = numbulet !== 1 ? vecCenter.toAngle() - gocban : vecCenter.toAngle()

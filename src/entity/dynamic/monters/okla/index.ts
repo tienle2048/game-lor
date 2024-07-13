@@ -21,17 +21,12 @@ export class BambooMonter extends BaseMonter {
       height: 64,
       collisionType: CollisionType.Active,
       collisionGroup: MonterCollisionGroup,
-      collider: ex.Shape.Box(60, 60),
+      collider: ex.Shape.Box(24, 24),
       hp: 20
     })
     this.enemy = 'player'
     this.manager = manager
     this.skill = [
-      // new ThunderSkill({
-      //   levelSkill: 0,
-      //   owner: this,
-      //   dame: 3
-      // }),
     ]
 
   }
@@ -51,25 +46,25 @@ export class BambooMonter extends BaseMonter {
     const leftIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 2) as ex.Sprite, duration: 200}]
     })
-    leftIdle.scale = ex.vec(2, 2)
+    leftIdle.scale = ex.vec(1.5, 1.5)
     this.graphics.add('left-idle', leftIdle)
 
     const rightIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 2) as ex.Sprite, duration: 200}]
     })
-    rightIdle.scale = ex.vec(2, 2)
+    rightIdle.scale = ex.vec(1.5, 1.5)
     this.graphics.add('right-idle', rightIdle)
 
     const upIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 3) as ex.Sprite, duration: 200}]
     })
-    upIdle.scale = ex.vec(2, 2)
+    upIdle.scale = ex.vec(1.5, 1.5)
     this.graphics.add('up-idle', upIdle)
 
     const downIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 0) as ex.Sprite, duration: 200}]
     })
-    downIdle.scale = ex.vec(2, 2)
+    downIdle.scale = ex.vec(1.5, 1.5)
     this.graphics.add('down-idle', downIdle)
 
     const leftWalk = new ex.Animation({
@@ -80,7 +75,7 @@ export class BambooMonter extends BaseMonter {
         {graphic: playerSpriteSheet.getSprite(2, 3) as ex.Sprite, duration: 200}
       ]
     })
-    leftWalk.scale = ex.vec(2, 2)
+    leftWalk.scale = ex.vec(1.5, 1.5)
     this.graphics.add('left-walk', leftWalk)
 
     const rightWalk = new ex.Animation({
@@ -91,7 +86,7 @@ export class BambooMonter extends BaseMonter {
         {graphic: playerSpriteSheet.getSprite(3, 3) as ex.Sprite, duration: 200}
       ]
     })
-    rightWalk.scale = ex.vec(2, 2)
+    rightWalk.scale = ex.vec(1.5, 1.5)
     this.graphics.add('right-walk', rightWalk)
 
     const upWalk = new ex.Animation({
@@ -102,7 +97,7 @@ export class BambooMonter extends BaseMonter {
         {graphic: playerSpriteSheet.getSprite(1, 3) as ex.Sprite, duration: 200}
       ]
     })
-    upWalk.scale = ex.vec(2, 2)
+    upWalk.scale = ex.vec(1.5, 1.5)
     this.graphics.add('up-walk', upWalk)
 
     const downWalk = new ex.Animation({
@@ -113,7 +108,7 @@ export class BambooMonter extends BaseMonter {
         {graphic: playerSpriteSheet.getSprite(0, 3) as ex.Sprite, duration: 200}
       ]
     })
-    downWalk.scale = ex.vec(2, 2)
+    downWalk.scale = ex.vec(1.5, 1.5)
     this.graphics.add('down-walk', downWalk)
   }
 
@@ -133,7 +128,7 @@ export class BambooMonter extends BaseMonter {
     // })[0] as Actor
     const ad = nearbyPlayers.pos.sub(this.pos)
     // if (ad.size < 400) {
-    this.vel = ad.normalize().scale(ex.vec(200, 200))
+    this.vel = ad.normalize().scale(ex.vec(100, 100))
     // }
 
     // const allMonter = this.scene?.world.queryManager.createTagQuery(['player']).getEntities((a: any, b: any) => {

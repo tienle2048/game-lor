@@ -5,7 +5,7 @@ import * as ex from 'excalibur'
 import {BaseHero} from '../baseHero'
 import {Images} from '../../../../resources'
 import {Sword} from '../../weapons'
-import { ShurikenSkill} from '../../../skills'
+import { ShurikenSkill, ThunderSkill} from '../../../skills'
 
 export const PlayerCollisionGroup = ex.CollisionGroupManager.create('player')
 const speedPlayer = 400
@@ -19,7 +19,7 @@ export class LegendHero extends BaseHero {
       height: 64,
       collisionType: CollisionType.Active,
       collisionGroup: PlayerCollisionGroup,
-      collider: ex.Shape.Box(60, 60),
+      collider: ex.Shape.Box(24, 24),
       name: 'Legend',
       hp: 20
     })
@@ -30,11 +30,11 @@ export class LegendHero extends BaseHero {
         owner: this,
         dame: 5
       }),
-      // new QuayVongSkill({
-      //   levelSkill: 0,
-      //   owner: this,
-      //   dame: 5
-      // }),
+      new ThunderSkill({
+        levelSkill: 0,
+        owner: this,
+        dame: 10
+      }),
     ]
   }
   onInitialize(engine: Engine) {
@@ -147,11 +147,13 @@ export class LegendHero extends BaseHero {
       this.graphics.use('down-walk')
     }
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.Space)) {
-      this.onAttack(engine)
+      this.onUpdateSkill(1)
     }
 
     if (engine.input.keyboard.wasReleased(ex.Input.Keys.Space)) {
-      this.onUpdateSkill("dad")
+      const dada = new Sword(this.pos.x,this.pos.y,10)
+      // dada.vel = ex.vec(100,0)
+      // engine.add(dada)
     }
 
     if (engine.input.keyboard.wasPressed(ex.Input.Keys.M)) {
@@ -169,11 +171,10 @@ export class LegendHero extends BaseHero {
       const spaceA = this.pos.sub(a.pos).size
       const spaceB = this.pos.sub(b.pos).size
       return spaceA - spaceB
-    })[0] as Actor
-    if (!allMonter) return
+    }) as Actor
+    if (!allMonter[0]) return
 
-    const space = allMonter.pos.sub(this.pos)
-
+    const space = allMonter[0].pos.sub(this.pos)
 
     for (let skill of this.skill) {
       skill.updateCooldown(skill.cooldown - elapsedMs)
@@ -194,7 +195,6 @@ export class LegendHero extends BaseHero {
   // onCollisionStart(self: Collider, other: Collider, side: Side, contact: CollisionContact) {}
 
   onAttack(engine: any) {
-    
     const allMonter = this.scene?.world.queryManager.createTagQuery(['monters']).getEntities((a: any, b: any) => {
       const spaceA = this.pos.sub(a.pos).size
       const spaceB = this.pos.sub(b.pos).size
@@ -220,9 +220,8 @@ export class LegendHero extends BaseHero {
     engine.add(weapon)
   }
 
-  onUpdateSkill(skill:string){
-    
-    this.skill[0].update()
+  onUpdateSkill(index: number){
+    this.skill[index].update()
   }
 
   move(vacac: ex.Vector){

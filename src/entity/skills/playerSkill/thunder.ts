@@ -31,7 +31,7 @@ export class ThunderSkill extends BaseSkill {
         {graphic: thunderSpriteSheet.getSprite(4, 0) as ex.Sprite, duration: 50},
         {graphic: thunderSpriteSheet.getSprite(5, 0) as ex.Sprite, duration: 50},
         {graphic: thunderSpriteSheet.getSprite(6, 0) as ex.Sprite, duration: 50},
-        {graphic: thunderSpriteSheet.getSprite(7, 0) as ex.Sprite, duration: 50},
+        {graphic: thunderSpriteSheet.getSprite(7, 0) as ex.Sprite, duration: 50}
       ]
     })
     thunder.scale = vec(4, 4)
@@ -39,13 +39,20 @@ export class ThunderSkill extends BaseSkill {
     this.fx = thunder
   }
 
-  onAttack(engine: Engine, target: BaseDynamic) {
-    const okla = new Actor({pos: vec(0, -30), width: 60, height: 10, z: 101})
-    this.fx!.events.on('loop', a => {
-      target.takeDamage(this.dame)
-      target.removeChild(okla)
-    })
-    okla.graphics.use(this.fx!)
-    target.addChild(okla)
+  onAttack(engine: Engine, targets: BaseDynamic[]) {
+    for (let target of targets.slice(0,this.levelSkill)) {
+      const okla = new Actor({pos: vec(0, -50), width: 60, height: 10, z: 101})
+      this.fx!.events.on('loop', a => {
+        target.takeDamage(this.dame)
+        target.removeChild(okla)
+      })
+      okla.graphics.use(this.fx!)
+      target.addChild(okla)
+    }
+  }
+
+  update() {
+    console.log('update thunder',this.levelSkill)
+    this.levelSkill += 1
   }
 }

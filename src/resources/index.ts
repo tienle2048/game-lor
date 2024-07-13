@@ -21,6 +21,7 @@ import Thunderpath from '../../assets/FX/Elemental/Thunder/SpriteSheet.png?url'
 import TilesetNaturepath from '../../assets/Backgrounds/Tilesets/TilesetNature.png?url'
 import map1path from '../../assets/map/map1.png?url'
 import themepath from '../../assets/maptest/theme.png?url'
+import WaterPot from '../../assets/Items/Potion/WaterPot.png?url'
 
 
 import TiledMapPath from '../../assets/maptest/mapokla.tmx?url'
@@ -64,6 +65,7 @@ const Images: Record<string, ImageSource> = {
   // map
   map1: new ImageSource(map1path),
   theme: new ImageSource(themepath),
+  WaterPot: new ImageSource(WaterPot)
   
 }
 

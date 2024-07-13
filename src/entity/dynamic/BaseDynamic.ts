@@ -2,6 +2,7 @@
 import {Actor, Color, vec, ActorArgs, Rectangle} from 'excalibur'
 import {BaseEntity} from '../BaseEntity'
 import { BaseSkill } from '../skills/BaseSkill'
+import { Ldadddad } from '../static/item'
 
 export class HPBar extends Actor {
   owner: BaseDynamic
@@ -40,7 +41,9 @@ export class HPBar extends Actor {
 
     this.line.width = dada
     if (this.owner.hp <= 0) {
-      this.owner.kill()
+      this.owner.kill(engine)
+      const dad = new Ldadddad(this.owner.pos.x,this.owner.pos.y,this.owner.manager)
+      engine.add(dad)
     }
   }
 }

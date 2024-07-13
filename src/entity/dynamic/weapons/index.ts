@@ -9,8 +9,8 @@ export class Sword extends ex.Actor {
   dame: number
   constructor(x: number, y: number, dame: number) {
     super({
-      x: x + 48,
-      y: y + 16,
+      x: x,
+      y: y,
       width: 32,
       height: 32,
       collisionType: ex.CollisionType.Passive,
@@ -49,6 +49,9 @@ export class Sword extends ex.Actor {
     if (other.owner.hasTag('monters')) {
       // other.owner.vel = ex.vec(100,100)
       const oklaaa = (other.owner as BaseDynamic).takeDamage(this.dame)
+      this.kill()
+    }
+    if(other.owner.name === "Tile Layer 2"){
       this.kill()
     }
   }
