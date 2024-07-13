@@ -16,7 +16,7 @@ export class GameManager {
     for (let i = 0; i < config; i++) {
       const ranX = new ex.Random(i).integer(300, 3000)
       const ranY = new ex.Random(ranX).integer(300, 1500)
-      const monter = new BambooMonter(ranX, ranY)
+      const monter = new BambooMonter(ranX, ranY, this)
       monter.z = 100
       scene.add(monter)
     }

@@ -1,4 +1,7 @@
 // @ts-nocheck
+
+import { GameManager } from './../../../../manager/index';
+
 import {Vector, Engine, CollisionType, Actor} from 'excalibur'
 import * as ex from 'excalibur'
 import {Images} from '../../../../resources'
@@ -9,7 +12,8 @@ import {BaseMonter} from '../baseMonter'
 export const MonterCollisionGroup = ex.CollisionGroupManager.create('monter')
 export class BambooMonter extends BaseMonter {
   enemy: string
-  constructor(x: number, y: number) {
+  manager: GameManager
+  constructor(x: number, y: number, manager: GameManager) {
     super({
       x,
       y,
@@ -21,6 +25,7 @@ export class BambooMonter extends BaseMonter {
       hp: 20
     })
     this.enemy = 'player'
+    this.manager = manager
     this.skill = [
       // new ThunderSkill({
       //   levelSkill: 0,
@@ -28,6 +33,7 @@ export class BambooMonter extends BaseMonter {
       //   dame: 3
       // }),
     ]
+
   }
   onInitialize(engine: Engine) {
     
@@ -45,25 +51,25 @@ export class BambooMonter extends BaseMonter {
     const leftIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 2) as ex.Sprite, duration: 200}]
     })
-    leftIdle.scale = ex.vec(4, 4)
+    leftIdle.scale = ex.vec(2, 2)
     this.graphics.add('left-idle', leftIdle)
 
     const rightIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 2) as ex.Sprite, duration: 200}]
     })
-    rightIdle.scale = ex.vec(4, 4)
+    rightIdle.scale = ex.vec(2, 2)
     this.graphics.add('right-idle', rightIdle)
 
     const upIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 3) as ex.Sprite, duration: 200}]
     })
-    upIdle.scale = ex.vec(4, 4)
+    upIdle.scale = ex.vec(2, 2)
     this.graphics.add('up-idle', upIdle)
 
     const downIdle = new ex.Animation({
       frames: [{graphic: playerSpriteSheet.getSprite(0, 0) as ex.Sprite, duration: 200}]
     })
-    downIdle.scale = ex.vec(4, 4)
+    downIdle.scale = ex.vec(2, 2)
     this.graphics.add('down-idle', downIdle)
 
     const leftWalk = new ex.Animation({
@@ -74,7 +80,7 @@ export class BambooMonter extends BaseMonter {
         {graphic: playerSpriteSheet.getSprite(2, 3) as ex.Sprite, duration: 200}
       ]
     })
-    leftWalk.scale = ex.vec(4, 4)
+    leftWalk.scale = ex.vec(2, 2)
     this.graphics.add('left-walk', leftWalk)
 
     const rightWalk = new ex.Animation({
@@ -85,7 +91,7 @@ export class BambooMonter extends BaseMonter {
         {graphic: playerSpriteSheet.getSprite(3, 3) as ex.Sprite, duration: 200}
       ]
     })
-    rightWalk.scale = ex.vec(4, 4)
+    rightWalk.scale = ex.vec(2, 2)
     this.graphics.add('right-walk', rightWalk)
 
     const upWalk = new ex.Animation({
@@ -96,7 +102,7 @@ export class BambooMonter extends BaseMonter {
         {graphic: playerSpriteSheet.getSprite(1, 3) as ex.Sprite, duration: 200}
       ]
     })
-    upWalk.scale = ex.vec(4, 4)
+    upWalk.scale = ex.vec(2, 2)
     this.graphics.add('up-walk', upWalk)
 
     const downWalk = new ex.Animation({
@@ -107,7 +113,7 @@ export class BambooMonter extends BaseMonter {
         {graphic: playerSpriteSheet.getSprite(0, 3) as ex.Sprite, duration: 200}
       ]
     })
-    downWalk.scale = ex.vec(4, 4)
+    downWalk.scale = ex.vec(2, 2)
     this.graphics.add('down-walk', downWalk)
   }
 
@@ -118,39 +124,39 @@ export class BambooMonter extends BaseMonter {
       // this.vel = ex.vec(0, 200)
       //   this.scene?.world.queryManager.getQuery
     }
-    const playersQuery = this.scene?.world.queryManager.createTagQuery([this.enemy])
+    const nearbyPlayers = this.manager.player
 
-    const nearbyPlayers = playersQuery?.getEntities((a: any, b: any) => {
-      const spaceA = this.pos.sub(a.pos).size
-      const spaceB = this.pos.sub(b.pos).size
-      return spaceA - spaceB
-    })[0] as Actor
+    // const nearbyPlayers = playersQuery?.getEntities((a: any, b: any) => {
+    //   const spaceA = this.pos.sub(a.pos).size
+    //   const spaceB = this.pos.sub(b.pos).size
+    //   return spaceA - spaceB
+    // })[0] as Actor
     const ad = nearbyPlayers.pos.sub(this.pos)
     // if (ad.size < 400) {
     this.vel = ad.normalize().scale(ex.vec(200, 200))
     // }
 
-    const allMonter = this.scene?.world.queryManager.createTagQuery(['player']).getEntities((a: any, b: any) => {
-      const spaceA = this.pos.sub(a.pos).size
-      const spaceB = this.pos.sub(b.pos).size
-      return spaceA - spaceB
-    })[0] as Actor
-    if (!allMonter) return
+    // const allMonter = this.scene?.world.queryManager.createTagQuery(['player']).getEntities((a: any, b: any) => {
+    //   const spaceA = this.pos.sub(a.pos).size
+    //   const spaceB = this.pos.sub(b.pos).size
+    //   return spaceA - spaceB
+    // })[0] as Actor
+    // if (!allMonter) return
 
-    const space = allMonter.pos.sub(this.pos)
-    for (let skill of this.skill) {
-      skill.updateCooldown(skill.cooldown - elapsedMs)
-      if (space.size > skill.range) {
-        const ad = allMonter.pos.sub(this.pos)
-        this.vel = ad.normalize().scale(ex.vec(100, 100))
-      } else {
-        this.vel = Vector.Zero
-        if (skill.cooldown <= 0) {
-          skill.onAttack(engine, allMonter)
-          skill.updateCooldown(skill.cooldownConfig)
-        }
-      }
-    }
+    // const space = allMonter.pos.sub(this.pos)
+    // for (let skill of this.skill) {
+    //   skill.updateCooldown(skill.cooldown - elapsedMs)
+    //   if (space.size > skill.range) {
+    //     const ad = allMonter.pos.sub(this.pos)
+    //     this.vel = ad.normalize().scale(ex.vec(100, 100))
+    //   } else {
+    //     this.vel = Vector.Zero
+    //     if (skill.cooldown <= 0) {
+    //       skill.onAttack(engine, allMonter)
+    //       skill.updateCooldown(skill.cooldownConfig)
+    //     }
+    //   }
+    // }
   }
 
   onCollisionStart(self: ex.Collider, other: ex.Collider, side: ex.Side, contact: ex.CollisionContact): void {

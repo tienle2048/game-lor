@@ -4,55 +4,87 @@ import {Animation, ImageSource, Loader, range, Sound, SpriteSheet, vec} from 'ex
 import { LegendHero } from '../entity'
 import { BambooMonter } from '../entity/dynamic/monters/okla'
 
+
+import Mon2path from '../../assets/Actor/Characters/Monk2/SpriteSheet.png?url'
+import Boypath from '../../assets/Actor/Characters/Boy/SpriteSheet.png?url'
+import CamouflageGreenpath from '../../assets/Actor/Characters/CamouflageGreen/SpriteSheet.png?url'
+import CamouflageRedpath from '../../assets/Actor/Characters/CamouflageRed/SpriteSheet.png?url'
+import Cavegirlpath from '../../assets/Actor/Characters/Cavegirl/SpriteSheet.png?url'
+import Cavegirl2path from '../../assets/Actor/Characters/Cavegirl2/SpriteSheet.png?url'
+import Bamboopath from '../../assets/Actor/Monsters/Bamboo/SpriteSheet.png?url'
+import Beastpath from '../../assets/Actor/Monsters/Beast/SpriteSheet.png?url'
+import Axolotpath from '../../assets/Actor/Monsters/Axolot/SpriteSheet.png?url'
+import Axepath from '../../assets/Items/Weapons/Axe/SpriteInHand.png?url'
+import Shurikenpath from '../../assets/Ui/Shuriken.png?url'
+import BigShurikenpath from '../../assets/FX/Projectile/BigShuriken.png?url'
+import Thunderpath from '../../assets/FX/Elemental/Thunder/SpriteSheet.png?url'
+import TilesetNaturepath from '../../assets/Backgrounds/Tilesets/TilesetNature.png?url'
+import map1path from '../../assets/map/map1.png?url'
+import themepath from '../../assets/maptest/theme.png?url'
+
+
+import TiledMapPath from '../../assets/maptest/mapokla.tmx?url'
+import TilesetFloor from '../../assets/maptest/TilesetFloor.tsx?url'
+import TilesetWater from '../../assets/maptest/TilesetWater.tsx?url'
+
+import TilesetFloorImage from '../../assets/Backgrounds//Tilesets/TilesetFloor.png?url'
+import TilesetWaterImage from '../../assets/Backgrounds//Tilesets/TilesetWater.png?url'
+
+
+
+
+
 const Images: Record<string, ImageSource> = {
   // hero
-  Monk2: new ImageSource('./assets/Actor/Characters/Monk2/SpriteSheet.png'),
-  Boy: new ImageSource('./assets/Actor/Characters/Boy/SpriteSheet.png'),
-  CamouflageGreen: new ImageSource('./assets/Actor/Characters/CamouflageGreen/SpriteSheet.png'),
-  CamouflageRed: new ImageSource('./assets/Actor/Characters/CamouflageRed/SpriteSheet.png'),
-  Cavegirl: new ImageSource('./assets/Actor/Characters/Cavegirl/SpriteSheet.png'),
-  Cavegirl2: new ImageSource('./assets/Actor/Characters/Cavegirl2/SpriteSheet.png'),
+  Monk2: new ImageSource(Mon2path),
+  Boy: new ImageSource(Boypath),
+  CamouflageGreen: new ImageSource(CamouflageGreenpath),
+  CamouflageRed: new ImageSource(CamouflageRedpath),
+  Cavegirl: new ImageSource(Cavegirlpath),
+  Cavegirl2: new ImageSource(Cavegirl2path),
 
   // Monsters
-  Bamboo: new ImageSource('./assets/Actor/Monsters/Bamboo/SpriteSheet.png'),
-  Beast: new ImageSource('./assets/Actor/Monsters/Beast/SpriteSheet.png'),
-  Axolot: new ImageSource('./assets/Actor/Monsters/Axolot/SpriteSheet.png'),
+  Bamboo: new ImageSource(Bamboopath),
+  Beast: new ImageSource(Beastpath),
+  Axolot: new ImageSource(Axolotpath),
 
 
   // Weapons 
-  Axe: new ImageSource('./assets/Items/Weapons/Axe/SpriteInHand.png'),
-  Shuriken: new ImageSource('./assets/Ui/Shuriken.png'),
-  BigShuriken: new ImageSource('./assets/FX/Projectile/BigShuriken.png'),
+  Axe: new ImageSource(Axepath),
+  Shuriken: new ImageSource(Shurikenpath),
+  BigShuriken: new ImageSource(BigShurikenpath),
 
 
   // fx 
-  Thunder: new ImageSource('./assets/FX/Elemental/Thunder/SpriteSheet.png'),
+  Thunder: new ImageSource(Thunderpath),
 
   // tile
-  TilesetNature: new ImageSource('./assets/Backgrounds/Tilesets/TilesetNature.png'),
+  TilesetNature: new ImageSource(TilesetNaturepath),
 
   // map
-  map1: new ImageSource('./assets/map/map1.png'),
-  theme: new ImageSource('./assets/maptest/theme.png'),
+  map1: new ImageSource(map1path),
+  theme: new ImageSource(themepath),
   
 }
 
 const Sounds: Record<string, Sound> = {}
 
 const Maps: Record<string, TiledResource> = {
-  TiledMap: new TiledResource('./assets/maptest/mapokla.tmx', {
+  TiledMap: new TiledResource(TiledMapPath, {
     entityClassNameFactories: {
       player: props => {
         const player = new LegendHero(props.worldPos.x,props.worldPos.y)
         player.z = 100
         return player
-      },
-      dadada: props => {
-        const player = new BambooMonter(props.worldPos.x,props.worldPos.y)
-        player.z = 100
-        return player
       }
-    }
+    },
+    pathMap: [
+      { path: 'mapokla.tmx', output: TiledMapPath },
+      { path: 'TilesetFloor.tsx', output: TilesetFloor },
+      { path: 'TilesetWater.tsx', output: TilesetWater },
+      { path: 'TilesetFloor.png', output: TilesetFloorImage },
+      { path: 'TilesetWater.png', output: TilesetWaterImage }
+    ]
   })
 }
 
