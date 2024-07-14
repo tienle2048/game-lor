@@ -36,10 +36,10 @@ export class GameManager {
   }
   updateExp(numExp: number) {
     this.exp += numExp
-    if(this.exp>10){
+    if(this.exp>this.maxExp){
       this.scene!.engine.goToScene('update')
       this.exp = 0
-      this.maxExp = this.maxExp * 1.2
+      this.maxExp = this.maxExp * 1.5
     }
   }
 }

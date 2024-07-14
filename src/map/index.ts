@@ -71,7 +71,7 @@ export class UpdateGame extends ex.Scene {
     this.optionSkills = [new UiSelectSkills(1,manager), new UiSelectSkills(2,manager)]
   }
   onInitialize(engine: ex.Engine<any>): void {
-    const center = new ex.Actor({pos: ex.vec(screen.width / 2, (screen.height / 3))})
+    const center = new ex.Actor({pos: ex.vec(window.innerWidth / 2, (window.innerHeight / 3))})
     for (let i of this.optionSkills) {
       center.addChild(i)
     }
