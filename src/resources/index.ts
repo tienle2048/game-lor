@@ -30,12 +30,14 @@ import TilesetWater from '../../assets/maptest/TilesetWater.tsx?url'
 
 import TilesetFloorImage from '../../assets/Backgrounds//Tilesets/TilesetFloor.png?url'
 import TilesetWaterImage from '../../assets/Backgrounds//Tilesets/TilesetWater.png?url'
+import DialogueBoxSimplepath from '../../assets/Ui/Dialog/DialogueBoxSimple.png?url'
+import FacesetBoxpath from '../../assets/Ui/Dialog/FacesetBox.png?url'
 
 
 
 
 
-const Images: Record<string, ImageSource> = {
+const Images = {
   // hero
   Monk2: new ImageSource(Mon2path),
   Boy: new ImageSource(Boypath),
@@ -65,7 +67,12 @@ const Images: Record<string, ImageSource> = {
   // map
   map1: new ImageSource(map1path),
   theme: new ImageSource(themepath),
-  WaterPot: new ImageSource(WaterPot)
+  WaterPot: new ImageSource(WaterPot),
+
+
+  // ui 
+  DialogueBoxSimple: new ImageSource(DialogueBoxSimplepath),
+  FacesetBox: new ImageSource(FacesetBoxpath),
   
 }
 

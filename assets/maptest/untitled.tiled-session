@@ -3,10 +3,174 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "dadadada.tmx",
+    "activeFile": "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj",
     "expandedProjectPaths": [
+        "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Ganvuard.tmj": {
+            "scale": 0.25168402777777776,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1440.2979926881426,
+                "y": 319.84548527281504
+            }
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Ganvuard.tmj#TX Tileset Ground": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx": {
+            "scale": 0.5662890625,
+            "selectedLayer": 13,
+            "viewCenter": {
+                "x": 640.1324411947298,
+                "y": 479.4371249223977
+            }
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#03": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#08": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#09": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#16": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#17": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#18": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Archer_Yellow": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Bridge_All": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Castle_Blue": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Castle_Construction": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Castle_Destroyed": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Castle_Red": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Dead": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Fire": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Foam": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#G_Idle": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#GoldMine_Active": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#GoldMine_Destroyed": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#GoldMine_Inactive": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Pawn_Yellow": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Ribbon_Yellow_3Slides": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Rocks_01": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Rocks_02": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Rocks_03": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Rocks_04": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Shadows": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Tilemap_Elevation": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Tilemap_Flat": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Tower_Blue": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Tower_Construction": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Tower_Destroyed": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Tower_Purple": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Tower_Red": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Tower_Yellow": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Tree": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#W_Idle": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Warrior_Yellow": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx#Water": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj": {
+            "scale": 0.3221,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 156.78360757528714,
+                "y": 308.9102763117045
+            }
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj#Foam": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj#Goblin_House": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj#TX Tileset Ground": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj#Tilemap_Elevation": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj#Tilemap_Flat": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj#Tree": {
+            "scaleInDock": 1
+        },
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj#Water": {
+            "scaleInDock": 1
+        },
         "TilesetField.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
@@ -27,19 +191,19 @@
             "scale": 3.6664,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -27.956578660266196,
-                "y": -15.410211651756484
+                "x": 50.04909447959851,
+                "y": 74.86908138773728
             }
         },
         "mapokla.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.4,
-            "selectedLayer": 2,
+            "scale": 0.8082,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 956.25,
-                "y": 446.25
+                "x": 970.6755753526354,
+                "y": 677.4313288789903
             }
         },
         "nine_path_2.tsx": {
@@ -64,7 +228,10 @@
     "openFiles": [
         "mapokla.tmx",
         "nine_path_2.tsx",
-        "dadadada.tmx"
+        "dadadada.tmx",
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx",
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Ganvuard.tmj",
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj"
     ],
     "project": "untitled.tiled-project",
     "property.type": "bool",
@@ -72,6 +239,9 @@
         "mapokla.tmx",
         "nine_path_2.tsx",
         "dadadada.tmx",
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Main town.tmx",
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/Ganvuard.tmj",
+        "/Users/tienle/Documents/emyeukhoahoc/game/spade-attack/src/res/Tiled/lobby.tmj",
         "TilesetFloor.tsx",
         "TilesetWater.tsx",
         "TilesetField.tsx",

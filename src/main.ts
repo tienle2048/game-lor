@@ -4,13 +4,14 @@ import nipplejs, {JoystickManager} from 'nipplejs'
 import {GameManager} from './manager'
 import {BaseMap, UpdateGame} from './map'
 import {loader, Maps} from './resources'
+window.Telegram.WebApp.disableVerticalSwipes()
 
 const game = new ex.Engine({
   antialiasing: false,
   displayMode: ex.DisplayMode.FillScreen,
   pointerScope: ex.Input.PointerScope.Document
 })
-// game.toggleDebug();
+game.toggleDebug();
 game.start(loader).then(() => {
   const joystickManager = nipplejs.create({
     zone: document.getElementById('joystick')!,
@@ -40,7 +41,7 @@ game.start(loader).then(() => {
     }
   })
 
-  game.goToScene('level1')
+  game.goToScene('update')
 
   level1.camera.strategy.lockToActor(Maps.TiledMap.getEntitiesByClassName('player')[0])
 })

@@ -2,7 +2,7 @@
 import {GameManager} from './../manager/index'
 import * as ex from 'excalibur'
 import {Images} from '../resources'
-import {UiSelectSkills} from '../ui'
+import { UiInfoCharacter, UiSelectSkills} from '../ui'
 const waveConfig = {
   '1': {
     monter: ['BambooMonter'],
@@ -49,6 +49,7 @@ export class BaseMap extends ex.Scene {
     this.manager.joystick.on('end', (event, data) => {
       this.manager.player.vel = ex.Vector.Zero
     })
+    
     this.manager.setEngine(this)
   }
 
@@ -68,7 +69,8 @@ export class UpdateGame extends ex.Scene {
   constructor(manager: GameManager) {
     super()
     this.manager = manager
-    this.optionSkills = [new UiSelectSkills(1,manager), new UiSelectSkills(2,manager)]
+    this.optionSkills = [new UiSelectSkills(1,manager), new UiSelectSkills(2,manager),new UiSelectSkills(3,manager)]
+    this.UiInfo = new UiInfoCharacter(this.manager)
   }
   onInitialize(engine: ex.Engine<any>): void {
     const center = new ex.Actor({pos: ex.vec(window.innerWidth / 2, (window.innerHeight / 3))})
@@ -76,6 +78,15 @@ export class UpdateGame extends ex.Scene {
       center.addChild(i)
     }
     this.add(center)
+    this.add(this.UiInfo)
+  }
+
+  onActivate(context: ex.SceneActivationContext<any>): void {
+    this.UiInfo.onUpdateInfo()
+  }
+
+  onDeactivate(context: ex.SceneActivationContext<any>): void {
+    
   }
 
 }

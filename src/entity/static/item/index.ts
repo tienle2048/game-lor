@@ -33,10 +33,15 @@ export class Ldadddad extends ex.Actor {
         height: 11 * 1.5
       })
     )
-    if (this.manager) this.actions.moveTo(this.manager.player.pos, 800)
   }
 
-  onPreUpdate(engine: ex.Engine<any>, delta: number): void {}
+  onPreUpdate(engine: ex.Engine<any>, delta: number): void {
+    if (this.manager) {
+      const posPlayer = this.manager.player.pos
+      const ad = posPlayer.sub(this.pos)
+      this.vel = ad.normalize().scale(ex.vec(800, 800))
+    }
+  }
 
   onCollisionStart(self: ex.Collider, other: ex.Collider, side: ex.Side, contact: ex.CollisionContact): void {
     if (other.owner.hasTag('player')) {
