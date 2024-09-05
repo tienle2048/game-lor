@@ -4,7 +4,10 @@ import nipplejs, {JoystickManager} from 'nipplejs'
 import {GameManager} from './manager'
 import {BaseMap, UpdateGame} from './map'
 import {loader, Maps} from './resources'
-window.Telegram.WebApp.disableVerticalSwipes()
+
+if(window.Telegram){
+  window.Telegram.WebApp.disableVerticalSwipes()
+}
 
 const game = new ex.Engine({
   antialiasing: false,
